@@ -19,9 +19,10 @@ def index(request):
 def problem_one(request):
     # Find all students who have a GPA greater than 3.0. 
     # Order the data by highest GPAs first.
+    students_over_3gpa = Student.objects.filter(gpa__gte=3)
 
     context = {
-        'students': None
+        'students': students_over_3gpa
     }
     return render(request, 'school/one.html', context)
 
@@ -29,8 +30,11 @@ def problem_two(request):
     # Find all instructors hired prior to 2010
     # Order by hire date
 
+    instructors_pre2021 = Instructor.objects.filter(hire_date__lte="2010-01-01")
+
+
     context = {
-        'instructors': None
+        'instructors': instructors_pre2021
     }
     return render(request, 'school/two.html', context)
 
@@ -38,8 +42,13 @@ def problem_three(request):
     # Find all students who have a A+ in any class and are NOT getting a C+ in any class. 
     # Order the data by student's first name alphabetically.
 
+
+    star_students = StudentCourse.objects.filter(grade='A+')
+    extra_star_students = star_students.exclude(student__studentcourse__grade='C+').order_by('student__first_name')
+
+
     context = {
-        'student_courses': None
+        'student_courses': extra_star_students
     }
     return render(request, 'school/three.html', context)
 
