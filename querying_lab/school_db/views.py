@@ -19,7 +19,7 @@ def index(request):
 def problem_one(request):
     # Find all students who have a GPA greater than 3.0. 
     # Order the data by highest GPAs first.
-    students_over_3gpa = Student.objects.filter(gpa__gte=3)
+    students_over_3gpa = Student.objects.filter(gpa__gte=3).order_by('-gpa')
 
     context = {
         'students': students_over_3gpa
@@ -56,8 +56,11 @@ def problem_four(request):
     # Find all students who are taking the Programming class. 
     # Order by their grade. 
 
+    programming_students = StudentCourse.objects.filter(course_id=4).order_by('grade')
+    
+
     context = {
-        'student_courses': None
+        'student_courses': programming_students
     }
     return render(request, 'school/four.html', context)
 
@@ -65,8 +68,10 @@ def problem_five(request):
     # Find all students getting an A in the Programming class. 
     # Order by last name.
 
+    students = StudentCourse.objects.filter(course_id=4)
+    a_students = students.filter(grade='A').order_by('student__last_name')
     context = {
-        'student_courses': None
+        'student_courses': a_students
     }
     return render(request, 'school/five.html', context)
 
@@ -74,8 +79,11 @@ def problem_six(request):
     # Find all students with a GPA less than 3.0 who are getting an A in Programming class.
     # Order by GPA.
 
+    a_students = StudentCourse.objects.filter(course_id=4)
+    lessthan_gpa = a_students.filter(student__gpa__lt=3).order_by('student__gpa')
+
     context = {
-        'student_courses': None
+        'student_courses': lessthan_gpa
     }
     return render(request, 'school/six.html', context)
 

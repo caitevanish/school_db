@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Problem Five</title>
-</head>
-<body>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
     <h1>Programming Students With A</h1>
-</body>
+    <div class="center-text">
+      <table class="center-table">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in student_courses %}
+          <tr>
+            <td>{{item.student.first_name}}</td>
+            <td>{{item.student.last_name}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
 </html>
