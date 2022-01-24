@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>devCodeCamp Django Querying Lab</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1 class="center-text">devCodeCamp Django Querying Lab</h2>
+    <nav>
+        <ul>
+            <li><a href="{% url 'lab:one' %}">Problem One</a></li>
+            <li><a href="{% url 'lab:two' %}">Problem Two</a></li>
+            <li><a href="{% url 'lab:three' %}">Problem Three</a></li>
+            <li><a href="{% url 'lab:four' %}">Problem Four</a></li>
+            <li><a href="{% url 'lab:five' %}">Problem Five</a></li>
+            <li><a href="{% url 'lab:six' %}">Problem Six</a></li>
+        </ul>
+    </nav>
+    <div class="center-text">
+        <h2>List of all Students:</h2>
+        <table class="center-table">
+            <thead>
+                <tr>
+                    <th>First Name</th><th>Last Name</th><th>GPA</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{student.first_name}}</td><td>{{student.last_name}}</td><td>{{student.gpa}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
